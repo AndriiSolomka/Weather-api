@@ -1,5 +1,5 @@
 {
-  "name": "@weather-app/weather",
+  "name": "@weather-api/email",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -12,15 +12,15 @@
         "defaultConfiguration": "production",
         "options": {
           "platform": "node",
-          "outputPath": "apps/weather/dist",
+          "outputPath": "apps/email/dist",
           "format": [
             "cjs"
           ],
           "bundle": false,
-          "main": "apps/weather/src/main.ts",
-          "tsConfig": "apps/weather/tsconfig.app.json",
+          "main": "apps/email/src/main.ts",
+          "tsConfig": "apps/email/tsconfig.app.json",
           "assets": [
-            "apps/weather/src/assets"
+            "apps/email/src/assets"
           ],
           "esbuildOptions": {
             "sourcemap": true,
@@ -49,15 +49,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@weather-app/weather:build",
+          "buildTarget": "@weather-api/email:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@weather-app/weather:build:development"
+            "buildTarget": "@weather-api/email:build:development"
           },
           "production": {
-            "buildTarget": "@weather-app/weather:build:production"
+            "buildTarget": "@weather-api/email:build:production"
           }
         }
       },
@@ -65,27 +65,7 @@
         "options": {
           "passWithNoTests": true
         }
-      },
-      "test-arch": {
-        "executor": "@nx/jest:jest",
-        "options": {
-          "jestConfig": "apps/weather/tests/jest-architecture.json",
-          "passWithNoTests": true
-        }
       }
     }
-  },
-  "dependencies": {
-    "@bufbuild/protobuf": "^2.6.2",
-    "@bufbuild/protoc-gen-es": "^2.6.2",
-    "@connectrpc/connect": "^2.0.3",
-    "@connectrpc/connect-fastify": "^2.0.3",
-    "close-with-grace": "^2.2.0",
-    "prom-client": "^15.1.3",
-    "zod": "^4.0.14"
-  },
-  "devDependencies": {
-    "msw": "^2.10.4",
-    "tsarch": "^5.4.1"
   }
 }

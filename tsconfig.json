@@ -4,10 +4,16 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/weather-e2e"
+      "path": "./apps/weather"
     },
     {
-      "path": "./apps/weather"
+      "path": "./apps/email"
+    },
+    {
+      "path": "./apps/subscription"
+    },
+    {
+      "path": "./libs"
     }
   ]
 }
