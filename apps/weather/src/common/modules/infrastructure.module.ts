@@ -22,7 +22,7 @@ export class InfrastructureModule {
   public readonly cacheMetrics: CacheMetricsInterface;
   public readonly promRegistry: Registry;
 
-  constructor({ config }: Container) {
+  constructor({ config, promRegistry }: Container) {
     this.logger = new LoggerService(config.logger);
 
     this.httpClient = new LoggingHttpClient(new HttpClient(), this.logger);
@@ -33,7 +33,6 @@ export class InfrastructureModule {
       config.weatherApi.geocodingApiUrl,
     );
 
-    this.promRegistry = new Registry();
-    this.cacheMetrics = new CacheMetrics(this.promRegistry);
+    this.cacheMetrics = new CacheMetrics(promRegistry);
   }
 }

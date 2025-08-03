@@ -11,9 +11,9 @@ export class ServerModule {
   public readonly weatherService: WeatherInterface;
   public readonly promRegistry: Registry;
 
-  constructor({ weatherModule, infrastructureModule }: Container) {
+  constructor({ weatherModule, promRegistry }: Container) {
     this.weatherService = weatherModule.weatherService;
-    this.promRegistry = infrastructureModule.promRegistry;
+    this.promRegistry = promRegistry;
     this.server = new Server();
     this.registerRoutes();
   }

@@ -43,9 +43,6 @@ export class CacheMetrics implements CacheMetricsInterface {
   }
 
   clearAllMetrics(): void {
-    this.cacheHitCounter.reset();
-    this.cacheMissCounter.reset();
-    this.cacheSize.reset();
-    this.cacheOperationDuration.reset();
+    this.registry.clear();
   }
 }

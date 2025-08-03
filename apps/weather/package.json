@@ -92,7 +92,9 @@
     "zod": "^4.0.14"
   },
   "devDependencies": {
+    "@types/supertest": "^6.0.3",
     "msw": "^2.10.4",
+    "supertest": "^7.1.4",
     "tsarch": "^5.4.1"
   }
 }
