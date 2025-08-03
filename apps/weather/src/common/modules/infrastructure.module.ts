@@ -8,6 +8,7 @@ import {
   LoggingHttpClient,
   RedisClient,
 } from '@weather-app/libs';
+import { Registry } from 'prom-client';
 
 import { Container } from '../../container';
 import { CacheMetricsInterface } from '../../core/cache-metrics.interface';
@@ -19,6 +20,7 @@ export class InfrastructureModule {
   public readonly redisClient: RedisClient;
   public readonly geocodingService: GeocodingInterface;
   public readonly cacheMetrics: CacheMetricsInterface;
+  public readonly promRegistry: Registry;
 
   constructor({ config }: Container) {
     this.logger = new LoggerService(config.logger);
@@ -31,6 +33,7 @@ export class InfrastructureModule {
       config.weatherApi.geocodingApiUrl,
     );
 
-    this.cacheMetrics = new CacheMetrics();
+    this.promRegistry = new Registry();
+    this.cacheMetrics = new CacheMetrics(this.promRegistry);
   }
 }

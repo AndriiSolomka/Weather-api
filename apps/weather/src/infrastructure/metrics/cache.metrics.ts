@@ -1,9 +1,7 @@
-import { Counter, Gauge, Histogram } from 'prom-client';
+import { Counter, Gauge, Histogram, Registry } from 'prom-client';
 
-import { createCacheMetricCollectors, register } from './cache.metrics.factory';
+import { createCacheMetricCollectors } from './cache.metrics.factory';
 import { CacheMetricsInterface } from '../../core/cache-metrics.interface';
-
-export { register };
 
 export class CacheMetrics implements CacheMetricsInterface {
   private readonly cacheHitCounter: Counter<string>;
@@ -11,13 +9,13 @@ export class CacheMetrics implements CacheMetricsInterface {
   private readonly cacheSize: Gauge<string>;
   private readonly cacheOperationDuration: Histogram<string>;
 
-  constructor() {
+  constructor(private readonly registry: Registry) {
     const {
       cacheHitCounter,
       cacheMissCounter,
       cacheSize,
       cacheOperationDuration,
-    } = createCacheMetricCollectors();
+    } = createCacheMetricCollectors(registry);
 
     this.cacheHitCounter = cacheHitCounter;
     this.cacheMissCounter = cacheMissCounter;
