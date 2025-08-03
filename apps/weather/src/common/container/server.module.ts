@@ -13,7 +13,6 @@ export class ServerModule {
 
   private registerRoutes(): void {
     this.server.registerFastifyRoute(new MetricsRoutes());
-
     this.server.registerConnectRoute(new WeatherRoutes(this.weatherService));
   }
 }

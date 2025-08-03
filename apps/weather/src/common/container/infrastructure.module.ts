@@ -22,6 +22,7 @@ export class InfrastructureModule {
 
   constructor(private readonly config: Config) {
     this.logger = new LoggerService(this.config.logger);
+
     this.httpClient = new LoggingHttpClient(new HttpClient(), this.logger);
 
     this.redisClient = new RedisClient(this.config.redis, this.logger);

@@ -1,8 +1,8 @@
 import { Container } from './common/container';
 
 const main = async () => {
-  const { app } = new Container();
-  await app.start();
+  const container = new Container();
+  await container.appModule.app.start();
 };
 
 void main();
