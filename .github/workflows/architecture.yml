@@ -1,0 +1,19 @@
+name: Architecture Tests
+
+on:
+  push:
+
+jobs:
+  architecture-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js and dependencies
+        uses: ./.github/actions/setup-node
+
+      - name: Run architecture tests
+        run: npm run test:architecture
+        shell: bash
