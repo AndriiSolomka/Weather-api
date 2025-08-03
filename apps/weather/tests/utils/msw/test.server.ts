@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals';
 import { setupServer } from 'msw/node';
 
 import type { RequestHandler } from 'msw';

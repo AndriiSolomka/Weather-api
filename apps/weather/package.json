@@ -72,6 +72,13 @@
           "jestConfig": "apps/weather/tests/jest-architecture.json",
           "passWithNoTests": true
         }
+      },
+      "test-integration": {
+        "executor": "@nx/jest:jest",
+        "options": {
+          "jestConfig": "apps/weather/tests/jest-integration.json",
+          "passWithNoTests": true
+        }
       }
     }
   },

@@ -45,4 +45,8 @@ export class Container {
   public getCacheRepository(): CacheRepositoryInterface {
     return this.cacheModule.redisRepository;
   }
+
+  public getServer() {
+    return this.serverModule.server;
+  }
 }
