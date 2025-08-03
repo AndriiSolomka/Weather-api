@@ -44,4 +44,8 @@ export class Server {
   public async close(): Promise<void> {
     await this.app.close();
   }
+
+  public getInstance(): FastifyInstance {
+    return this.app;
+  }
 }
