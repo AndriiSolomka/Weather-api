@@ -14,7 +14,9 @@ beforeAll(() => {
   mockServer.start();
 });
 
-beforeEach(() => {});
+beforeEach(() => {
+  mockServer.clearHandlers();
+});
 
 afterEach(() => {
   expect(mockServer.onUnhandledRequest).not.toHaveBeenCalled();

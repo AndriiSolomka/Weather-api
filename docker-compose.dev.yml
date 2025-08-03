@@ -1,0 +1,45 @@
+volumes:
+  postgres-db:
+  redis-data:
+  weather-data:
+  subscription-data:
+  notification-data:
+  gateway-data:
+  email-data:
+
+networks:
+  dev-network:
+    driver: bridge
+  weather-api-dev:
+    driver: bridge
+
+services:
+  redis:
+    container_name: redis
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+    command: ['redis-server', '--save', '60', '1', '--appendonly', 'yes']
+    networks:
+      - weather-api-dev
+
+  weather:
+    container_name: weather
+    build:
+      context: .
+      dockerfile: apps/weather/Dockerfile.dev
+    env_file:
+      - apps/weather/.env
+    ports:
+      - '5051:5051'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      redis:
+        condition: service_started
+    networks:
+      - weather-api-dev

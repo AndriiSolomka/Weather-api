@@ -1,0 +1,20 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json package-lock.json nx.json tsconfig.base.json tsconfig.json ./
+
+COPY apps/weather/package.json ./apps/weather/
+COPY libs/package.json ./libs/
+
+RUN npm ci
+
+COPY libs ./libs
+COPY apps/weather ./apps/weather
+COPY .nx ./.nx
+
+
+EXPOSE 5051
+
+
+CMD ["npm", "run", "start:weather:dev"]
