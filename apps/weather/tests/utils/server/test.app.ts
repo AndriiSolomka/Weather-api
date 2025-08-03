@@ -1,4 +1,4 @@
-import { Container } from '../../../src/common/container';
+import { Container } from '../../../src/common/modules';
 
 export async function createTestApp() {
   const container = new Container();
