@@ -1,4 +1,5 @@
-import { InternalServerError } from '../../common/errors/internal-server.error';
+import { Code, ConnectError } from '@connectrpc/connect';
+
 import { WeatherProviderInterface } from '../../core/weather-provider.interface';
 import { WeatherData } from '../../core/weather.interface';
 
@@ -14,8 +15,9 @@ export class WeatherProviderChain implements WeatherProviderInterface {
       }
     }
 
-    throw new InternalServerError(
+    throw new ConnectError(
       'No weather provider could handle the request',
+      Code.Internal,
     );
   }
 }
