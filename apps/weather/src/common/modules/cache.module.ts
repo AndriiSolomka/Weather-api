@@ -21,8 +21,8 @@ export class CacheModule {
     const baseCache = new CacheService<WeatherData>(
       infrastructureModule.logger,
       this.redisRepository,
-      config.cache.weatherCachePrefix,
-      config.cache.weatherCacheTTL,
+      config.get.cache.weatherCachePrefix,
+      config.get.cache.weatherCacheTTL,
     );
 
     this.weatherCache = new MetricsCacheDecorator<WeatherData>(

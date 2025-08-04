@@ -22,14 +22,14 @@ export class InfrastructureModule {
   public readonly promRegistry: Registry;
 
   constructor({ config, promRegistry }: Container) {
-    this.logger = new LoggerService(config.logger);
+    this.logger = new LoggerService(config.get.logger);
 
     this.httpClient = new HttpClient(this.logger);
 
-    this.redisClient = new RedisClient(config.redis, this.logger);
+    this.redisClient = new RedisClient(config.get.redis, this.logger);
     this.geocodingService = new GeocodingService(
       this.httpClient,
-      config.weatherApi.geocodingApiUrl,
+      config.get.weatherApi.geocodingApiUrl,
     );
 
     this.cacheMetrics = new CacheMetrics(promRegistry);

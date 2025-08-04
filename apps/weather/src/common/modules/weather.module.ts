@@ -11,13 +11,13 @@ export class WeatherModule {
   constructor({ infrastructureModule, config, cacheModule }: Container) {
     const openMeteoProvider = new OpenMeteoProviderService(
       infrastructureModule.httpClient,
-      config.weatherApi,
+      config.get.weatherApi,
       infrastructureModule.geocodingService,
     );
 
     const weatherApiProvider = new WeatherApiProviderService(
       infrastructureModule.httpClient,
-      config.weatherApi,
+      config.get.weatherApi,
     );
 
     const weatherProviderChain = new WeatherProviderChain(

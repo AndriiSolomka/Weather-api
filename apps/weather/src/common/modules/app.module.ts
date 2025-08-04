@@ -8,7 +8,7 @@ export class AppModule {
     this.app = new App(
       serverModule.server,
       infrastructureModule.logger,
-      config.app,
+      config.get.app,
     );
   }
 }
