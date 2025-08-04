@@ -39,7 +39,9 @@ export function createPinoLogger(config: LoggerConfig): Logger {
           app: config.appName,
           version: config.version,
         },
-        json: true,
+        replaceTimestamp: true,
+        timeout: 10000,
+        silenceErrors: false,
       },
       level: config.lokiLevel,
     });
@@ -47,7 +49,6 @@ export function createPinoLogger(config: LoggerConfig): Logger {
 
   return pino({
     level: config.level,
-    timestamp: pino.stdTimeFunctions.isoTime,
     transport: {
       targets,
     },
