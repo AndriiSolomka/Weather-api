@@ -1,3 +1,4 @@
+import { createHistogramTimer } from '@weather-app/libs';
 import { Counter, Gauge, Histogram, Registry } from 'prom-client';
 
 import { createCacheMetricCollectors } from './cache.metrics.factory';
@@ -36,10 +37,10 @@ export class CacheMetrics implements CacheMetricsInterface {
   }
 
   createCacheOperationStopper(cacheType: string, operation: string) {
-    const stopTimer = this.cacheOperationDuration.startTimer();
-    return (status: string) => {
-      stopTimer({ cache_type: cacheType, operation, status });
-    };
+    return createHistogramTimer(this.cacheOperationDuration, {
+      cache_type: cacheType,
+      operation,
+    });
   }
 
   clearAllMetrics(): void {

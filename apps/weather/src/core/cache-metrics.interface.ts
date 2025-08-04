@@ -1,3 +1,8 @@
+interface CacheOperationTimer {
+  stop(labels: { status: string }): void;
+  [Symbol.dispose]?(): void;
+}
+
 export interface CacheMetricsInterface {
   recordCacheHit(cacheType: string, method: string): void;
   recordCacheMiss(cacheType: string, method: string): void;
@@ -5,8 +10,8 @@ export interface CacheMetricsInterface {
 
   createCacheOperationStopper(
     cacheType: string,
-    operation: string,
-  ): (status: string) => void;
+    method: string,
+  ): CacheOperationTimer;
 
   clearAllMetrics(): void;
 }

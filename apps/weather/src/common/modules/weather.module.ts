@@ -1,6 +1,5 @@
 import { Container } from '../../container';
 import { WeatherInterface } from '../../core/weather.interface';
-import { LoggingWeatherProviderDecorator } from '../../infrastructure/decorators/providers-logging.decorator';
 import { OpenMeteoProviderService } from '../../infrastructure/providers/open-meteo.provider';
 import { WeatherApiProviderService } from '../../infrastructure/providers/weather-api.provider';
 import { WeatherProviderChain } from '../../infrastructure/providers/weather.provider';
@@ -10,29 +9,21 @@ export class WeatherModule {
   public readonly weatherService: WeatherInterface;
 
   constructor({ infrastructureModule, config, cacheModule }: Container) {
-    const openMeteoProvider = new LoggingWeatherProviderDecorator(
-      new OpenMeteoProviderService(
-        infrastructureModule.httpClient,
-        config.weatherApi,
-        infrastructureModule.geocodingService,
-      ),
-      infrastructureModule.logger,
-      'OpenMeteoProvider',
+    const openMeteoProvider = new OpenMeteoProviderService(
+      infrastructureModule.httpClient,
+      config.weatherApi,
+      infrastructureModule.geocodingService,
     );
 
-    const weatherApiProvider = new LoggingWeatherProviderDecorator(
-      new WeatherApiProviderService(
-        infrastructureModule.httpClient,
-        config.weatherApi,
-      ),
-      infrastructureModule.logger,
-      'WeatherApiProvider',
+    const weatherApiProvider = new WeatherApiProviderService(
+      infrastructureModule.httpClient,
+      config.weatherApi,
     );
 
-    const weatherProviderChain = new WeatherProviderChain([
-      weatherApiProvider,
-      openMeteoProvider,
-    ]);
+    const weatherProviderChain = new WeatherProviderChain(
+      infrastructureModule.logger,
+      [weatherApiProvider, openMeteoProvider],
+    );
 
     this.weatherService = new WeatherCacheProxyService(
       weatherProviderChain,
