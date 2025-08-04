@@ -1,13 +1,18 @@
-import { CacheRepositoryInterface, CacheService } from '@weather-app/libs';
+import {
+  CacheRepositoryInterface,
+  CacheService,
+  LoggerInterface,
+} from '@weather-app/libs';
 
 import { CacheConfig } from '../../common/config/cache.cnfig';
 import { WeatherData } from '../../core/weather.interface';
 
 export class CacheWeatherService extends CacheService<WeatherData> {
   constructor(
+    logger: LoggerInterface,
     cache: CacheRepositoryInterface,
     private readonly config: CacheConfig,
   ) {
-    super(cache, config.weatherCachePrefix, config.weatherCacheTTL);
+    super(logger, cache, config.weatherCachePrefix, config.weatherCacheTTL);
   }
 }

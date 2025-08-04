@@ -2,7 +2,6 @@ import {
   CacheInterface,
   CacheRepositoryInterface,
   CacheService,
-  LoggingCacheDecorator,
   RedisRepository,
 } from '@weather-app/libs';
 
@@ -20,21 +19,16 @@ export class CacheModule {
     );
 
     const baseCache = new CacheService<WeatherData>(
+      infrastructureModule.logger,
       this.redisRepository,
       config.cache.weatherCachePrefix,
       config.cache.weatherCacheTTL,
     );
 
-    const metricsCache = new MetricsCacheDecorator<WeatherData>(
+    this.weatherCache = new MetricsCacheDecorator<WeatherData>(
       baseCache,
       infrastructureModule.cacheMetrics,
       'WeatherCacheMetrics',
-    );
-
-    this.weatherCache = new LoggingCacheDecorator(
-      metricsCache,
-      infrastructureModule.logger,
-      'WeatherCache',
     );
   }
 }

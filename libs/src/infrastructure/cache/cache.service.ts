@@ -1,8 +1,10 @@
 import { CacheRepositoryInterface } from '../../core/cache/cache-repository.interface';
 import { CacheInterface } from '../../core/cache/cache.interface';
+import { LoggerInterface } from '../../core/logger/logger.interface';
 
 export class CacheService<T> implements CacheInterface<T> {
   constructor(
+    private readonly logger: LoggerInterface,
     private readonly cache: CacheRepositoryInterface,
     private readonly prefix: string,
     private readonly ttl: number,
@@ -28,10 +30,28 @@ export class CacheService<T> implements CacheInterface<T> {
 
   async getOrCompute(key: string, computeFn: () => Promise<T>): Promise<T> {
     const cached = await this.get(key);
-    if (cached) return cached;
+
+    if (cached) {
+      this.logger.debug({
+        context: CacheService.name,
+        method: 'get',
+        status: 'success',
+        params: { key },
+      });
+
+      return cached;
+    }
 
     const data = await computeFn();
     await this.set(key, data);
+
+    this.logger.debug({
+      context: CacheService.name,
+      method: 'set',
+      status: 'success',
+      params: { key },
+    });
+
     return data;
   }
 }

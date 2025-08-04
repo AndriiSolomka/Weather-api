@@ -5,7 +5,6 @@ import {
   HttpClientInterface,
   LoggerInterface,
   LoggerService,
-  LoggingHttpClient,
   RedisClient,
 } from '@weather-app/libs';
 import { Registry } from 'prom-client';
@@ -25,7 +24,7 @@ export class InfrastructureModule {
   constructor({ config, promRegistry }: Container) {
     this.logger = new LoggerService(config.logger);
 
-    this.httpClient = new LoggingHttpClient(new HttpClient(), this.logger);
+    this.httpClient = new HttpClient(this.logger);
 
     this.redisClient = new RedisClient(config.redis, this.logger);
     this.geocodingService = new GeocodingService(
