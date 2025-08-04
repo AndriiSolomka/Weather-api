@@ -35,6 +35,10 @@ function parseEnvConfig() {
       filePath: process.env.LOG_FILE_PATH,
       pretty: process.env.LOG_PRETTY,
       level: process.env.LOG_LEVEL,
+      lokiHost: process.env.LOKI_HOST,
+      lokiLevel: process.env.LOKI_LEVEL,
+      appName: process.env.APP_NAME,
+      version: process.env.APP_VERSION,
     },
     cache: {
       weatherCachePrefix: process.env.WEATHER_CACHE_PREFIX,

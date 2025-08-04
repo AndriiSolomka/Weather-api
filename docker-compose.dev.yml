@@ -41,5 +41,19 @@ services:
     depends_on:
       redis:
         condition: service_started
+      otel-lgtm:
+        condition: service_started
+    networks:
+      - weather-api-dev
+
+  otel-lgtm:
+    container_name: otel-lgtm
+    image: grafana/otel-lgtm:latest
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+      - '3100:3100'
+      - '4317:4317'
+      - '4318:4318'
     networks:
       - weather-api-dev
