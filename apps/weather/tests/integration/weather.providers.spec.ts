@@ -31,10 +31,10 @@ describe('WeatherService API (integration)', () => {
     server = container.serverModule.server.getInstance();
     cacheRepository = container.cacheModule.redisRepository;
 
-    await server.listen({ port: container.config.app.port });
+    await server.listen({ port: container.config.get.app.port });
 
     const transport = createConnectTransport({
-      baseUrl: `http://${container.config.app.host}:${container.config.app.port}`,
+      baseUrl: `http://${container.config.get.app.host}:${container.config.get.app.port}`,
     });
 
     weatherClient = createClient(WeatherService, transport);
