@@ -3,7 +3,7 @@ import { HttpResponse, JsonBodyType, http } from 'msw';
 export const weatherApi = {
   mock: (fn: (city: string | null) => HttpResponse<JsonBodyType>) => {
     return http.get(
-      'http://api.weatherapi.com/v1/current.json',
+      'http://api.weatherapi.com/v1/current.json*',
       ({ request }) => {
         const url = new URL(request.url);
         const city = url.searchParams.get('q');

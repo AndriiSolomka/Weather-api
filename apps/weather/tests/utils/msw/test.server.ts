@@ -19,7 +19,7 @@ export function createMockServer() {
           const hostname = url.hostname;
 
           const isLocalhost =
-            hostname === '127.0.0.1' || hostname === 'localhost';
+            hostname === '0.0.0.0' || hostname === 'localhost';
 
           const isExcluded = excludedUrls.some((excludedUrl) =>
             href.startsWith(excludedUrl),
