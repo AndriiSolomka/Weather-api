@@ -1,5 +1,3 @@
-import { Registry } from 'prom-client';
-
 import { ConfigService } from './common/config/config';
 import { AppModule } from './common/modules/app.module';
 import { CacheModule } from './common/modules/cache.module';
@@ -9,8 +7,6 @@ import { WeatherModule } from './common/modules/weather.module';
 
 export class Container {
   public config = new ConfigService();
-
-  public promRegistry = new Registry();
 
   public infrastructureModule = new InfrastructureModule(this);
 

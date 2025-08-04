@@ -11,15 +11,14 @@ export class ServerModule {
   public readonly weatherService: WeatherInterface;
   public readonly promRegistry: Registry;
 
-  constructor({ weatherModule, promRegistry }: Container) {
+  constructor({ weatherModule }: Container) {
     this.weatherService = weatherModule.weatherService;
-    this.promRegistry = promRegistry;
     this.server = new Server();
     this.registerRoutes();
   }
 
   private registerRoutes(): void {
-    this.server.registerFastifyRoute(new MetricsRoutes(this.promRegistry));
+    this.server.registerFastifyRoute(new MetricsRoutes());
     this.server.registerConnectRoute(new WeatherRoutes(this.weatherService));
   }
 }

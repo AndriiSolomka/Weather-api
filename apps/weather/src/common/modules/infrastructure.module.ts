@@ -21,7 +21,7 @@ export class InfrastructureModule {
   public readonly cacheMetrics: CacheMetricsInterface;
   public readonly promRegistry: Registry;
 
-  constructor({ config, promRegistry }: Container) {
+  constructor({ config }: Container) {
     this.logger = new LoggerService(config.get.logger);
 
     this.httpClient = new HttpClient(this.logger);
@@ -32,6 +32,6 @@ export class InfrastructureModule {
       config.get.weatherApi.geocodingApiUrl,
     );
 
-    this.cacheMetrics = new CacheMetrics(promRegistry);
+    this.cacheMetrics = new CacheMetrics();
   }
 }

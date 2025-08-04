@@ -1,5 +1,5 @@
 import { createHistogramTimer } from '@weather-app/libs';
-import { Counter, Gauge, Histogram, Registry } from 'prom-client';
+import { Counter, Gauge, Histogram } from 'prom-client';
 
 import { createCacheMetricCollectors } from './cache.metrics.factory';
 import { CacheMetricsInterface } from '../../core/cache-metrics.interface';
@@ -10,13 +10,13 @@ export class CacheMetrics implements CacheMetricsInterface {
   private readonly cacheSize: Gauge<string>;
   private readonly cacheOperationDuration: Histogram<string>;
 
-  constructor(private readonly registry: Registry) {
+  constructor() {
     const {
       cacheHitCounter,
       cacheMissCounter,
       cacheSize,
       cacheOperationDuration,
-    } = createCacheMetricCollectors(registry);
+    } = createCacheMetricCollectors();
 
     this.cacheHitCounter = cacheHitCounter;
     this.cacheMissCounter = cacheMissCounter;
@@ -44,6 +44,10 @@ export class CacheMetrics implements CacheMetricsInterface {
   }
 
   clearAllMetrics(): void {
-    this.registry.clear();
+    console.log('Clearing all cache metrics');
+    this.cacheHitCounter.reset();
+    this.cacheMissCounter.reset();
+    this.cacheSize.reset();
+    this.cacheOperationDuration.reset();
   }
 }
