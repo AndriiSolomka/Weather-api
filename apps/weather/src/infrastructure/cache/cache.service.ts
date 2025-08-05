@@ -4,7 +4,7 @@ import {
   LoggerInterface,
 } from '@weather-app/libs';
 
-import { CacheConfig } from '../../common/config/cache.cnfig';
+import { CacheConfig } from '../../common/config/cache.config';
 import { WeatherData } from '../../core/weather.interface';
 
 export class CacheWeatherService extends CacheService<WeatherData> {

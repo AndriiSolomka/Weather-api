@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 import { z } from 'zod';
 
 import { AppConfigSchema } from './app.config';
-import { CacheConfigSchema } from './cache.cnfig';
+import { CacheConfigSchema } from './cache.config';
 import { WeatherApiConfigSchema } from './weather-api.config';
 
 dotenv.config();
