@@ -11,7 +11,7 @@ describe('metrics controller (integration)', () => {
   beforeAll(async () => {
     container = new Container();
     server = container.serverModule.server.getInstance();
-    metricsService = container.infrastructureModule.cacheMetrics;
+    metricsService = container.cacheModule.cacheMetrics;
     await server.listen({ port: container.config.get.app.port });
   });
 
