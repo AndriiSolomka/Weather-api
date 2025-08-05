@@ -24,7 +24,7 @@ export const createCacheMetricCollectors = () => {
   const cacheOperationDuration = new Histogram({
     name: CACHE_METRIC_NAMES.OPERATION_DURATION_SECONDS,
     help: 'Duration of cache operations',
-    labelNames: ['cache_type', 'operation', 'status'],
+    labelNames: ['method', 'status'],
     buckets: [0.001, 0.005, 0.01, 0.05, 0.1, 0.5],
   });
 
