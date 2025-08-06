@@ -9,5 +9,6 @@
   "moduleNameMapper": {
     "^apps/(.*)$": "<rootDir>/apps/$1",
     "^libs/(.*)$": "<rootDir>/libs/$1"
-  }
+  },
+  "setupFilesAfterEnv": ["<rootDir>/apps/weather/tests/utils/msw/mock-server.setup.ts"]
 }
