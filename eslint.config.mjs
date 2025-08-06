@@ -11,7 +11,12 @@ export default [
   ...nx.configs['flat/javascript'],
   ...tseslint.config(
     {
-      ignores: ['eslint.config.mjs', 'public/**', 'dist/**', 'node_modules/**'],
+      ignores: [
+        'eslint.config.mjs',
+        'public/**',
+        '**/dist/**',
+        '**/node_modules/**',
+      ],
     },
     eslint.configs.recommended,
     ...tseslint.configs.recommendedTypeChecked,
@@ -40,6 +45,7 @@ export default [
         '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/no-floating-promises': 'warn',
         '@typescript-eslint/no-unsafe-argument': 'warn',
+        'import/no-cycle': 'error',
         'import/order': [
           'error',
           {
@@ -69,6 +75,6 @@ export default [
         ],
         'import/no-unresolved': 'off',
       },
-    }
+    },
   ),
 ];
